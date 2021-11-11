@@ -1,0 +1,89 @@
+1)--------------------------------------
+def print_till_zero(n):
+    if(n==0):
+       return 1
+    print(n)
+    return print_till_zero(n-1)
+
+a = int(input())
+print_till_zero(a)
+2)--------------------------------------
+def is_palindrome(s):
+    if((len(s) != 0) and (s[0] == s[len(s)-1])):
+        s.remove(s[0])
+        if not s:
+            return 
+        s.remove(s[len(s)-1])
+        is_palindrome(s)
+    if not s:
+        return True
+    else:
+        return False
+s = input()
+s = list(s)
+print(is_palindrome(s))
+3)--------------------------------------
+def power(a, n):
+    if(n == 0):
+        return 1
+    if(n < 0):
+        n = n*(-1)
+        if(n == 1):
+            return 1/a
+        if(n % 2 == 0):
+            a = power(a, n/2) * power(a, n/2)
+        else:
+            a = a * power(a, n-1)
+        return 1/a
+    else:
+        if(n == 1):
+            return a
+        if(n % 2 == 0):
+            a = power(a, n/2) * power(a, n/2)
+        else:
+            a = a * power(a, n-1)
+        return a
+a = int(input())
+n = int(input())
+print(power(a,n))
+4)--------------------------------------
+def max_in(list):
+    if(len(list) == 1):
+        return list[0]
+    else:
+        max = max_in(list[1:])
+        if(max>list[0]):
+            return max
+        else:
+            return list[0]
+
+n = [int(el) for el in input().split()]
+n = list(n)
+print(max_in(n))
+5)--------------------------------------
+def fib(n):
+    if n in (1, 2):
+        return 1
+    return fib(n - 1) + fib(n - 2)
+
+n = int(input())
+print(fib(n-1)) # минус 1 тк ряд Фибоначчи надо считать по логике, те
+                # начиная с 1, таким образом: 0, 1, 1, 2, 3, 5, 8  ...
+                #                    индексы [1][2][3][4][5][6][7] ...
+                # если взять просто n, то индексом первого числа будет ноль
+6)--------------------------------------
+import sys
+sys.setrecursionlimit(10000)
+
+def hanoi(n, i, k): # n - число дисков; 
+                    # i - столбец с которого прекладывают
+                    # k - столбец на который перекладывают
+    if(n==1):
+        print('сдвинут диск', 1, 'с стержня', i, 'на стержень', k)
+    else:
+        tmp = 6 - i - k # временный 3-ий столбец, помогающий в решении
+        hanoi(n-1, i, tmp)
+        print('сдвинут диск', n, 'с стержня', i, 'на стержень', k)
+        hanoi(n-1, tmp, k)
+
+hanoi(10, 1, 2) 
